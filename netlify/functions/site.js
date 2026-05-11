@@ -69,7 +69,7 @@ function _setSize() {
     if (dw && db) {
       clearInterval(t);
       dw.setAttribute('style', 'right:20px;bottom:16px;max-width:310px!important');
-      db.setAttribute('style', 'max-width:310px!important;max-height:530px!important');
+      db.setAttribute('style', 'max-width:310px!important;');
     }
   }, 2);
 }
