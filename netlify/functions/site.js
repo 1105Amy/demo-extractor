@@ -69,9 +69,9 @@ function _setSize() {
     if (dw && db) {
       clearInterval(t);
       // Bubble weiter von rechts/unten → nicht abgeschnitten
-      dw.setAttribute('style', 'right:60px;bottom:22px;max-width:310px!important');
+      dw.setAttribute('style', 'right:50px;bottom:22px;max-width:310px!important');
       // Panel etwas breiter
-      db.setAttribute('style', 'max-width:400px!important;');
+      db.setAttribute('style', 'max-width:360px!important;');
     }
   }, 2);
 }
