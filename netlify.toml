@@ -1,0 +1,7 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from   = "/extract"
+  to     = "/.netlify/functions/extract"
+  status = 200
