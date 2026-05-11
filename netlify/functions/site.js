@@ -71,7 +71,7 @@ function _setSize() {
       // Bubble weiter von rechts/unten → nicht abgeschnitten
       dw.setAttribute('style', 'right:50px;bottom:22px;max-width:310px!important');
       // Panel etwas breiter
-      db.setAttribute('style', 'max-width:360px!important;');
+      db.setAttribute('style', 'max-width:340px!important;');
     }
   }, 2);
 }
