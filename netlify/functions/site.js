@@ -68,8 +68,10 @@ function _setSize() {
     const db = _sr.querySelector('div#lc_text-widget--box');
     if (dw && db) {
       clearInterval(t);
-      dw.setAttribute('style', 'right:20px;bottom:16px;max-width:310px!important');
-      db.setAttribute('style', 'max-width:310px!important;');
+      // Bubble weiter von rechts/unten → nicht abgeschnitten
+      dw.setAttribute('style', 'right:50px;bottom:22px;max-width:310px!important');
+      // Panel etwas breiter
+      db.setAttribute('style', 'max-width:340px!important;');
     }
   }, 2);
 }
