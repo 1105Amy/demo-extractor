@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+
 
 // ── Branche → Widget-ID Mapping (Werte hier eintragen) ──────────────────────
 const BRANCHE_WIDGETS = {
