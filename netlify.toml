@@ -10,3 +10,6 @@
   from   = "/site"
   to     = "/.netlify/functions/site"
   status = 200
+
+[functions]
+  timeout = 26
