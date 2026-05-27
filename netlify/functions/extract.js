@@ -69,8 +69,13 @@ async function jinaFetch(url, apiKey) {
   try {
     const controller = new AbortController();
     const t = setTimeout(() => controller.abort(), 8000);
+
+    // Authorization nur setzen wenn API Key vorhanden
+    const headers = { 'Accept': 'text/plain', 'X-Timeout': '7' };
+    if (apiKey) headers['Authorization'] = 'Bearer ' + apiKey;
+
     const res = await fetch('https://r.jina.ai/' + url, {
-      headers: { 'Authorization': 'Bearer ' + apiKey, 'Accept': 'text/plain', 'X-Timeout': '7' },
+      headers,
       signal: controller.signal
     });
     clearTimeout(t);
