@@ -21,10 +21,8 @@ exports.handler = async function(event) {
   const email     = params.email   || '';
   const vorname   = params.vorname || '';
   const name      = params.name    || '';
-
-  // Branche → Widget-ID (Fallback: Brautmoden)
-  const branche  = params.branche || 'Brautmoden';
-  const widgetId = BRANCHE_WIDGETS[branche] || BRANCHE_WIDGETS.Brautmoden;
+  const branche   = params.branche || 'Brautmoden';
+  const widgetId  = BRANCHE_WIDGETS[branche] || BRANCHE_WIDGETS.Brautmoden;
 
   if (!targetUrl) {
     return { statusCode: 400, body: 'Missing url parameter' };
@@ -44,21 +42,26 @@ exports.handler = async function(event) {
 
   let html = await response.text();
 
-  // Base-Tag für relative URLs
+  // ── Base-Tag für relative URLs ──
   try {
     const base = new URL(targetUrl);
     const baseTag = `<base href="${base.origin}/">`;
-    if (html.includes('<head>')) {
-      html = html.replace('<head>', '<head>' + baseTag);
-    } else if (html.includes('<HEAD>')) {
-      html = html.replace('<HEAD>', '<HEAD>' + baseTag);
-    }
+    html = html.replace(/<head>/i, '<head>' + baseTag);
   } catch(e) {}
 
-  // Widget + Cookie-Unterdrückung + Auto-Fill + Positioning
+  // ── Viewport auf Mobile-Breite erzwingen (iPhone-Layout) ──
+  const viewportTag = '<meta name="viewport" content="width=390, initial-scale=1">';
+  if (/<meta[^>]*name=["']viewport["'][^>]*>/i.test(html)) {
+    html = html.replace(/<meta[^>]*name=["']viewport["'][^>]*>/i, viewportTag);
+  } else {
+    html = html.replace(/<head>/i, '<head>' + viewportTag);
+  }
+
+  // ── Widget + Cookie-Unterdrückung + Auto-Fill + Positioning ──
   const widgetScript = `
 <script>
 (function() {
+
   // Cookie Banner unterdrücken
   var style = document.createElement('style');
   style.textContent = [
@@ -97,6 +100,7 @@ exports.handler = async function(event) {
     setTimeout(_setSize, 500);
   }
   _setSize();
+
 })();
 <\/script>`;
 
@@ -119,3 +123,4 @@ exports.handler = async function(event) {
     body: html,
   };
 };
+
