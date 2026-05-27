@@ -11,5 +11,8 @@
   to     = "/.netlify/functions/site"
   status = 200
 
-[functions]
+[functions.extract]
+  timeout = 26
+
+[functions.site]
   timeout = 26
